@@ -5,9 +5,9 @@
         <table>
           <thead>
             <tr>
-              <th @click="sort('name')">Name</th>
-              <th @click="sort('age')">Age</th>
-              <th @click="sort('gender')">Gender</th>
+              <th @click="sort('name')">Name &#8595;</th>
+              <th @click="sort('age')">Age &#8595;</th>
+              <th @click="sort('gender')">Gender &#8595;</th>
             </tr>
           </thead>
 
@@ -22,7 +22,19 @@
             </tr>
           </tbody>
         </table>
-        <p>debug: sort: {{ currentSort }}, dir: {{ currentSortDir }}</p>
+        <div style="text-align: center;">
+          <span>debug: sort: {{ currentSort }}, dir: {{ currentSortDir }}</span>
+          <p>page: {{ this.page.current }}, length: {{ this.page.length }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="button-list">
+          <div @click="prevPage" class="btn btnPrimary"> &#x2190; </div>
+          <div @click="nextPage" class="btn btnPrimary"> &#8594; </div>
+        </div>
       </div>
     </section>
   </div>
@@ -35,7 +47,11 @@ export default {
     return {
       users: [],
       currentSort: 'name',
-      currentSortDir: 'asc'
+      currentSortDir: 'asc',
+      page: {
+        current: 1,
+        length: 3
+      }
     }
   },
   created() {
@@ -64,8 +80,12 @@ export default {
         let bValue = valueMap[this.currentSort] ? valueMap[this.currentSort](b) : b[this.currentSort];
 
         return (aValue < bValue ? -1 : aValue > bValue ? 1 : 0) * modifier;
+      }).filter((row, index) => {
+        let start = (this.page.current - 1) * this.page.length;
+        let end = this.page.current * this.page.length;
+        if(index >= start && index < end) return true
       });
-    }
+    },
   },
 
   methods: {
@@ -76,6 +96,16 @@ export default {
         this.currentSort = event
         this.currentSortDir = 'asc'
       }
+    },
+    prevPage() {
+      if(this.page.current > 1) this.page.current--
+      // this.page.current > 1 ? this.page.current-- : null
+    },
+    nextPage() {
+      if(this.page.current * this.page.length < this.users.length) {
+        this.page.current++
+      }
+      // this.page.current < this.page.total ? this.page.current++ : null
     }
   }
 }
@@ -88,5 +118,14 @@ img {
   height: auto;
   border-radius: 50%;
   margin-right: 16px;
+}
+.button-list {
+  width: 100%;
+  text-align: center;
+
+  .btn {
+    border-radius: 60px;
+    margin: 0 20px;
+  }
 }
 </style>

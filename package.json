@@ -1,0 +1,23 @@
+{
+  "name": "users-crm",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "core-js": "^3.40.0",
+    "node-sass": "^9.0.0",
+    "postcss": "^8.5.1",
+    "sass-loader": "^16.0.4",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vue-template-compiler": "^2.7.16",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-service": "^5.0.8"
+  }
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <h1>{{ title }}</h1>
+
+    <div class="message" v-if="message">
+      <p>{{ message }}</p>
+    </div>
+
+    <div class="new-note">
+      <input v-model="note.title" type="text">
+      <textarea v-model="note.desc"></textarea>
+      <button @click="addNote">New note</button>
+    </div>
+
+    <div class="notes">
+      <div class="note" v-for="(note, index) in notes" :key="index">
+        <div class="note-header">
+          <p>{{ note.title}}</p>
+        </div>
+        <div class="note-body">
+          <p>{{ note.desc }}</p>
+          <span>{{ note.date }}</span>
+        </div>
+      </div>
+      <p>{{ notesCount }}</p>
+    </div>
+  </div>
+
+<script>
+  const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        title: 'Notes App',
+        message: null,
+        note: {
+          title: '',
+          desc: '',
+        },
+        notes: [
+          {
+            title: 'First Note',
+            desc: 'Description for first note',
+            date: new Date(Date.now()).toLocaleString()
+          },
+          {
+            title: 'Second Note',
+            desc: 'Description for second note',
+            date: new Date(Date.now()).toLocaleString()
+          },
+          {
+            title: 'Third Note',
+            desc: 'Description for third note',
+            date: new Date(Date.now()).toLocaleString()
+          }
+        ]
+      }
+    },
+    methods: {
+      addNote() {
+        // console.log(this.note)
+        const { title, desc } = this.note
+
+        if(title.trim() === '' || desc.trim() === '') {
+          this.message = 'title can`t be empty'
+          return
+        } 
+
+        this.notes.push({
+          title: title,
+          desc: desc,
+          date: new Date(Date.now()).toLocaleString()
+        })
+        this.note.title = '',
+        this.note.desc = ''
+        this.message = null
+      }
+    },
+    computed: {
+      notesCount() {
+        return this.notes.length
+      }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>
+

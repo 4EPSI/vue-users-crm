@@ -2,7 +2,7 @@
   <div class="wrapper-content wrapper-content--fixed">
     <section>
       <div class="container">
-        <table>
+        <table class="table">
           <thead>
             <tr>
               <th @click="sort('name')">Name &#8595;</th>

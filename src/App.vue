@@ -4,7 +4,7 @@
       <div class="navbar">
         <div class="container">
           <div class="navbar-content">
-            <div class="logo">Users CRM</div>
+            <router-link class="logo" to="/">Users CRM</router-link>
             <ul class="navbar-list">
               <li v-for="link in links" :key="link.name" class="navbar-item">
                 <router-link class="navbar-link" :to="link.path">{{ link.name }}</router-link>
@@ -26,7 +26,8 @@ export default {
     return {
       links: [
         { name: 'Home', path: '/' },
-        { name: 'Users', path: '/users' }
+        { name: 'Users', path: '/users' },
+        { name: 'Notify', path: '/notifyPage'}
       ]
     }
   }

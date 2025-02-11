@@ -5,6 +5,8 @@
         <td><span>{{ message.title }}</span></td>
       </tr>
     </transition-group>
+
+    <button @click="loadMore" class="btn btnPrimary">Load more</button>
   </table>
 </template>
 
@@ -14,6 +16,12 @@ export default {
     messages: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    loadMore() {
+      this.$store.dispatch('loadMessages')
+        .catch(err => { console.error(err) })
     }
   }
 }
@@ -39,5 +47,8 @@ td {
 .list-enter, .list-leave-to {
   opacity: 0;
   transform: translateY(30px);
+}
+button {
+  margin-top: 20px;
 }
 </style>

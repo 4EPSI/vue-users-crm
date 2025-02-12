@@ -1,13 +1,22 @@
 <template>
-  <table>
-    <transition-group name="list" tag="tbody">
-      <tr v-for="message in messages" :key="message.title">
-        <td><span>{{ message.title }}</span></td>
-      </tr>
-    </transition-group>
-
-    <button @click="loadMore" class="btn btnPrimary">Load more</button>
-  </table>
+  <div>
+    <table>
+      <transition-group name="list" tag="tbody">
+        <tr v-for="message in messages" :key="message.title">
+          <td><span>{{ message.title }}</span></td>
+        </tr>
+      </transition-group>
+  
+    </table>
+    <button 
+      class="btn btnPrimary"
+      @click="loadMore" 
+      :disabled="maxLength === 0"
+      :class="{ btnDisabled: maxLength === 0 }"
+      >
+        Load more
+    </button>
+  </div>
 </template>
 
 <script>
@@ -16,6 +25,11 @@ export default {
     messages: {
       type: Array,
       required: true
+    }
+  },
+  computed: {
+    maxLength() {
+      return this.$store.getters.getMessageFilter.length
     }
   },
   methods: {
@@ -49,6 +63,13 @@ td {
   transform: translateY(30px);
 }
 button {
+  display: flex;
+  justify-content: center;
+  margin: auto;
   margin-top: 20px;
+  &.btnDisabled {
+    cursor: not-allowed;
+    opacity: .6;
+  }
 }
 </style>

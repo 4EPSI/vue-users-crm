@@ -27,7 +27,8 @@ export default {
       links: [
         { name: 'Home', path: '/' },
         { name: 'Users', path: '/users' },
-        { name: 'Notify', path: '/notifyPage'}
+        { name: 'Notify', path: '/notifyPage'},
+        { name: 'Github', path: '/github'},
       ]
     }
   }

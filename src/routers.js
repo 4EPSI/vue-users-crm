@@ -6,6 +6,7 @@ const routerHistory = createWebHashHistory()
 import Home from './pages/Home.vue'
 import Users from './pages/Users.vue'
 import Notify from './pages/NotifyPage.vue'
+import Github from './pages/Github.vue'
 import noteFoundPage from './pages/404.vue'
 
 const routers = createRouter({
@@ -25,6 +26,11 @@ const routers = createRouter({
       path: '/NotifyPage',
       name: 'notify',
       component: Notify
+    },
+    {
+      path: '/Github',
+      name: 'github',
+      component: Github
     },
     {
       path: '/:catchAll(.*)',

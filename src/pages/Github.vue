@@ -30,6 +30,7 @@
           </div>
   
           <div v-for="repo in sortedRepos" :key="repo.id" class="repos-item">
+            <!-- <img :src="repo.owner.avatar_url" :alt="repo.owner.login"> -->
             <div class="repos-info">
               <a :href="repo.html_url" target="_blank" class="link">{{ repo.name }}</a>
               <span>{{ repo.stargazers_count }} ⭐</span>
@@ -85,7 +86,7 @@ export default {
   },
   methods: {
     async getRepos() {
-      // console.log(`get user ${this.search} repos`)
+    //  console.log(`get user ${this.search} repos`)
       if(!this.search.trim()) return
 
       this.loading = true;
@@ -95,6 +96,8 @@ export default {
         const response = await axios.get(`https://api.github.com/users/${this.search}/repos`)
         this.repos = response.data
         this.error = null
+        console.log(this.repos);
+        
       } catch(error) {
         console.error('error in getRepos', error)
         this.repos = null
